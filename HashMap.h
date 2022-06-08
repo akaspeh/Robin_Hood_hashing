@@ -81,13 +81,15 @@ private:
     HashSigment* array;
     int size, arrlen = 11;
     float coefload;
+    int a;
+    int b;
 
     ArrayOfPrimeNum PrimeArr;
 
 
     long long hash(long long key) const
     {
-        return ((key * 2 + 7) % 4194610382161) % (arrlen);
+        return ((key * a + b) % 9149658775000477) % (arrlen);
     }
 
 
@@ -129,10 +131,11 @@ private:
         }
     }
 public:
-    HashMap():array(nullptr),size(0),coefload(0.5)
+    HashMap():array(nullptr),size(0),coefload(0.5),b(rand()%20)
     {
         PrimeArr.set_newArr(arrlen * 4);
         array = new HashSigment[arrlen];
+        a = PrimeArr.FindNearest(rand()%20);
     }
 
     ~HashMap()
